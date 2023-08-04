@@ -52,13 +52,13 @@ const Cabecalho = () => {
                 <BotaoChat onClick={toggleTelaChat}/>
                 <BotaoEntrar onClick={toggleTelaEntrar}/>
             </div>
+            <TelaChat visivel={telaChatVisivel} aoClicarNoX={toggleTelaChat}/>
             {telaDeAnuncioVisivel && (
                 <>
                     <FundoDesfocado />
                     <TelaDeAnuncio aoClicarNoX={toggleTelaDeAnuncio}/>
                 </>    
             )}
-            <TelaChat visivel={telaChatVisivel} aoClicarNoX={toggleTelaChat}/>
             {telaEntrarVisivel && (
                 <>
                     <FundoDesfocado />
