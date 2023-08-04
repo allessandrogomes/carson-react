@@ -1,4 +1,4 @@
-function OptionTelaDeAnuncio(props) {
+const OptionTelaDeAnuncio = (props) => {
     return (
         props.itens.map(marca => {
             return (

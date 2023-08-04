@@ -1,10 +1,10 @@
 import InputTelaDeCadastro from "./InputTelaDeCadastro"
 import LabelTelaDeCadastro from "./LabelTelaDeCadastro"
 
-function TelaDeCadastro() {
+const TelaDeCadastro = ({ aoClicarNoX }) => {
     return (
-        <div id="telaDeCadastro" className="hidden flex gap-10 flex-col items-center fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5">
-            <span className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeCadastro"><img src="./imagens/Main/botao-fechar.png" alt="Botão fechar tela de Login"/></span>
+        <div id="telaDeCadastro" className="flex gap-10 flex-col items-center fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5">
+            <span onClick={aoClicarNoX} className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeCadastro"><img src="./imagens/Main/botao-fechar.png" alt="Botão fechar tela de Login"/></span>
             <h2 className="font-bold font-archivo text-black text-center mb-2 mt-4 text-2xl">Cadastro</h2>
             <div className="w-11/12 h-3/4">
                 <form id="formCadastro" action="#" className="flex h-full w-full flex-col flex-wrap text-left">

@@ -1,18 +1,16 @@
-import InputTelaDeAnuncio from "./TelaDeAnuncio/InputTelaDeAnuncio"
-import LabelTelaDeAnuncio from "./TelaDeAnuncio/LabelTelaDeAnuncio"
-import OptionTelaDeAnuncio from "./TelaDeAnuncio/OptionTelaDeAnuncio"
-
-function TelaDeAnuncio() {
-
+import InputTelaDeAnuncio from "./InputTelaDeAnuncio"
+import LabelTelaDeAnuncio from "./LabelTelaDeAnuncio"
+import OptionTelaDeAnuncio from "./OptionTelaDeAnuncio"
+const TelaDeAnuncio = ({ aoClicarNoX }) => {
     const marcas = ['Chevrolet', 'Fiat', 'Ford', 'Honda', 'Mitsubishi', 'Volkswagen', 'Toyota', 'Hyundai']
     const estados = ['Acre', 'São Paulo', 'Rio de Janeiro', 'Mato Grosso', 'Minas Gerais', 'Alagoas', 'Bahia', 
                     'Rio Grande do Sul', 'Maranhão', 'Amazonas']
     const cores = ['Branco', 'Cinza', 'Azul', 'Verde', 'Vermelho', 'Preto']
 
     return (
-        <div className="telaDeAnuncioResponsive hidden fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5"
+        <div className="telaDeAnuncioResponsive fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5"
                 id="telaDeAnuncio">
-                <span className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeAnuncio"><img
+                <span onClick={aoClicarNoX} className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeAnuncio"><img
                         src="./imagens/Main/botao-fechar.png" alt="Botão fechar tela de Anúncio"/></span>
                 <h2 className="font-bold font-archivo text-black text-center mt-10 text-2xl">Anunciar na CarsOn</h2>
                 <p className="text-center mt-5 font-archivo">Preencha as informações do veículo</p>

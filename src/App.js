@@ -1,7 +1,7 @@
 import './App.css';
 import './responsive.css';
-import Cabecalho from './componentes/Cabecalho/Cabecalho';
-import Main from './componentes/Main/Main';
+import Cabecalho from './componentes/Cabecalho';
+import Main from './componentes/Main';
 import Chamada from './componentes/Main/Chamada';
 import ContainerCentral from './componentes/Main/ContainerCentral/ContainerCentral';
 import SessaoFiltros from './componentes/Main/ContainerCentral/SessaoFiltros';

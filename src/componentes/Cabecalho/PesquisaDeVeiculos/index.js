@@ -1,4 +1,4 @@
-function PesquisaDeVeiculos() {
+const PesquisaDeVeiculos = () => {
     return (
         <div className="navListLi w-1/2 items-center h-12" id="divInputDePesquisa">
             <div className="flex items-center ">
