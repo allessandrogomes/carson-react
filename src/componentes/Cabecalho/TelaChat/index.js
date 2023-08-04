@@ -1,16 +1,17 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const TelaChat = ({ aoClicarNoX, visivel }) => {
 
     const [mensagens, setMensagens] = useState([])
     const [mensagemDigitada, setMensagemDigitada] = useState('')
+    const inputMensagemChat = useRef()
 
     const armazenaMensagem = (evento) => {
         setMensagemDigitada(evento.target.value.trim())
     }
-
+    
     const enviarMensagem = (evento) => {
-        if (evento.key === 'Enter') {
+        if (evento.key === 'Enter' || evento.type === 'click') {
             if (mensagemDigitada.length > 0) {
                 const novaMensagemDeUsuario = 
                     <div key={mensagens.length} className="flex justify-end items-center m-2">
@@ -19,10 +20,10 @@ const TelaChat = ({ aoClicarNoX, visivel }) => {
                     </div>
                 setMensagens((prevMensagens) => [...prevMensagens, novaMensagemDeUsuario])
                 setMensagemDigitada('')
-                evento.target.value = ''
+                inputMensagemChat.current.value = ''
             } else {
                 setMensagemDigitada('')
-                evento.target.value = ''
+                inputMensagemChat.current.value = ''
             } 
         }
     }
@@ -41,8 +42,8 @@ const TelaChat = ({ aoClicarNoX, visivel }) => {
                 {mensagens}
             </div>
             <div className="w-full h-1/6 rounded-b">
-                <input onChange={armazenaMensagem} onKeyDown={enviarMensagem} id="inputMensagemChat" className="h-full w-10/12 outline-none p-2 rounded-b font-archivo" placeholder="Escreva sua mensagem" type="text"/>
-                <img id="btnEnviarMensagemChat" className="absolute bottom-5 left-93 w-6 cursor-pointer" src="./imagens/Chat/icon-send-menssage.png" alt="Ícone enviar mensagem"/>
+                <input ref={inputMensagemChat} onChange={armazenaMensagem} onKeyDown={enviarMensagem} id="inputMensagemChat" className="h-full w-10/12 outline-none p-2 rounded-b font-archivo" placeholder="Escreva sua mensagem" type="text"/>
+                <img onClick={enviarMensagem} id="btnEnviarMensagemChat" className="absolute bottom-5 left-93 w-6 cursor-pointer" src="./imagens/Chat/icon-send-menssage.png" alt="Ícone enviar mensagem"/>
             </div>
         </div>
     )
