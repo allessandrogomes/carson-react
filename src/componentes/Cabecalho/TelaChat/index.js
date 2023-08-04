@@ -15,7 +15,7 @@ const TelaChat = ({ aoClicarNoX, visivel }) => {
                 const novaMensagemDeUsuario = 
                     <div key={mensagens.length} className="flex justify-end items-center m-2">
                         <p className="font-archivo bg-color3 p-2 rounded break-all max-w-[250px]">{mensagemDigitada}</p>
-                        <img className="w-12% m-3" src="./imagens/chat/icon-user.png" alt="Ícone usuário bot"/>
+                        <img className="w-12% m-3" src="./imagens/Chat/icon-user.png" alt="Ícone usuário bot"/>
                     </div>
                 setMensagens((prevMensagens) => [...prevMensagens, novaMensagemDeUsuario])
                 setMensagemDigitada('')
