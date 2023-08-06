@@ -1,6 +1,3 @@
-import { useState } from "react"
-import TelaChat from "../TelaChat"
-
 const BotaoChat = ({ onClick }) => {
     return (
         <div id="btnAbrirChat" className="zIndex navListLi flex w-[100px] h-10 items-center justify-around">

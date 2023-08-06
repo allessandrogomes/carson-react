@@ -1,3 +1,4 @@
+import { useState } from "react"
 import InputTelaDeAnuncio from "./InputTelaDeAnuncio"
 import LabelTelaDeAnuncio from "./LabelTelaDeAnuncio"
 import OptionTelaDeAnuncio from "./OptionTelaDeAnuncio"
@@ -6,6 +7,29 @@ const TelaDeAnuncio = ({ aoClicarNoX }) => {
     const estados = ['Acre', 'São Paulo', 'Rio de Janeiro', 'Mato Grosso', 'Minas Gerais', 'Alagoas', 'Bahia', 
                     'Rio Grande do Sul', 'Maranhão', 'Amazonas']
     const cores = ['Branco', 'Cinza', 'Azul', 'Verde', 'Vermelho', 'Preto']
+
+    const [valorInputAno, setvalorInputAno] = useState('')
+    const [valorInputPreco, setvalorInputPreco] = useState('')
+    const [valorInputKm, setvalorInputKm] = useState('')
+    const [valorInputCidade, setvalorInputCidade] = useState('')
+
+    const formatacaoPreco = (evento) => {
+        const valor = evento.target.value.replace(/\D/g, '')
+        const valorInteiro = parseInt(valor, 10)
+
+        if(isNaN(valorInteiro)) {
+            setvalorInputPreco('')
+        } else {
+            const valorFormatado = valorInteiro.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            })
+            setvalorInputPreco(valorFormatado.replace(/^(R\$\s*)?/i, ''))
+        }
+        
+    }
 
     return (
         <div className="telaDeAnuncioResponsive fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5"
@@ -24,16 +48,16 @@ const TelaDeAnuncio = ({ aoClicarNoX }) => {
                     <InputTelaDeAnuncio id="nome" maxLength="15" classe=""/>
                     
                     <LabelTelaDeAnuncio nome="Preço" for="inputAnunciarPreco"/>
-                    <InputTelaDeAnuncio id="preco" maxLength="10" classe="inputPreco"/>
+                    <InputTelaDeAnuncio value={valorInputPreco} onChange={formatacaoPreco} id="preco" maxLength="10" classe="inputPreco"/>
                     
                     <LabelTelaDeAnuncio nome="Ano" for="inputAnunciarAno"/>
-                    <InputTelaDeAnuncio id="ano" maxLength="4" classe="inputAno"/>
+                    <InputTelaDeAnuncio value={valorInputAno} onChange={evento => setvalorInputAno(evento.target.value.replace(/\D/g, ''))} id="ano" maxLength="4" classe="inputAno"/>
                     
                     <LabelTelaDeAnuncio nome="Km" for="inputAnunciarKm"/>
-                    <InputTelaDeAnuncio id="km" maxLength="6" classe="inputAno"/>
+                    <InputTelaDeAnuncio value={valorInputKm} onChange={evento => setvalorInputKm(evento.target.value.replace(/\D/g, ''))} id="km" maxLength="6" classe="inputAno"/>
 
                     <LabelTelaDeAnuncio nome="Cidade" for="inputAnunciarCidade"/>
-                    <InputTelaDeAnuncio id="cidade" maxLength="25" classe=""/>
+                    <InputTelaDeAnuncio value={valorInputCidade} onChange={evento => setvalorInputCidade(evento.target.value.replace(/[^a-zA-ZÀ-ÿ ]/gu, ''))} id="cidade" maxLength="25" classe=""/>
 
                     <LabelTelaDeAnuncio nome="Estado" for="inputAnunciarEstado"/>
                     <select className="w-48 h-6 rounded font-archivo font-bold mb-4 informacaoCarro" required id="estado">
