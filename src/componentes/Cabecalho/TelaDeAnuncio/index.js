@@ -51,7 +51,7 @@ const TelaDeAnuncio = ({ aoClicarNoX }) => {
                     <InputTelaDeAnuncio value={valorInputPreco} onChange={formatacaoPreco} id="preco" maxLength="10" classe="inputPreco"/>
                     
                     <LabelTelaDeAnuncio nome="Ano" for="inputAnunciarAno"/>
-                    <InputTelaDeAnuncio value={valorInputAno} onChange={evento => setvalorInputAno(evento.target.value.replace(/\D/g, ''))} id="ano" maxLength="4" classe="inputAno"/>
+                    <InputTelaDeAnuncio value={valorInputAno} onChange={evento => setvalorInputAno(evento.target.value.replace(/\D/g, ''))} id="ano" minLength="4" maxLength="4" classe="inputAno"/>
                     
                     <LabelTelaDeAnuncio nome="Km" for="inputAnunciarKm"/>
                     <InputTelaDeAnuncio value={valorInputKm} onChange={evento => setvalorInputKm(evento.target.value.replace(/\D/g, ''))} id="km" maxLength="6" classe="inputAno"/>
