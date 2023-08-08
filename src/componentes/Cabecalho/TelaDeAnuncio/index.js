@@ -2,7 +2,7 @@ import { useState } from "react"
 import InputTelaDeAnuncio from "./InputTelaDeAnuncio"
 import LabelTelaDeAnuncio from "./LabelTelaDeAnuncio"
 import OptionTelaDeAnuncio from "./OptionTelaDeAnuncio"
-const TelaDeAnuncio = ({ aoClicarNoX }) => {
+const TelaDeAnuncio = (props) => {
     const marcas = ['Chevrolet', 'Fiat', 'Ford', 'Honda', 'Mitsubishi', 'Volkswagen', 'Toyota', 'Hyundai']
     const estados = ['Acre', 'São Paulo', 'Rio de Janeiro', 'Mato Grosso', 'Minas Gerais', 'Alagoas', 'Bahia', 
                     'Rio Grande do Sul', 'Maranhão', 'Amazonas']
@@ -12,6 +12,7 @@ const TelaDeAnuncio = ({ aoClicarNoX }) => {
     const [valorInputPreco, setvalorInputPreco] = useState('')
     const [valorInputKm, setvalorInputKm] = useState('')
     const [valorInputCidade, setvalorInputCidade] = useState('')
+    
 
     const formatacaoPreco = (evento) => {
         const valor = evento.target.value.replace(/\D/g, '')
@@ -34,11 +35,11 @@ const TelaDeAnuncio = ({ aoClicarNoX }) => {
     return (
         <div className="telaDeAnuncioResponsive fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-width-600px h-600 bg-teal-400 p-5"
                 id="telaDeAnuncio">
-                <span onClick={aoClicarNoX} className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeAnuncio"><img
+                <span onClick={props.aoClicarNoX} className="w-8 absolute top-2.5 right-2.5 cursor-pointer" id="fecharTelaDeAnuncio"><img
                         src="./imagens/Main/botao-fechar.png" alt="Botão fechar tela de Anúncio"/></span>
                 <h2 className="font-bold font-archivo text-black text-center mt-10 text-2xl">Anunciar na CarsOn</h2>
                 <p className="text-center mt-5 font-archivo">Preencha as informações do veículo</p>
-                <form className="formAnuncioResponsive text-left flex flex-col h-4/6 flex-wrap mt-10 mx-10 items-center" action="#">
+                <form onSubmit={props.onSubmit} className="formAnuncioResponsive text-left flex flex-col h-4/6 flex-wrap mt-10 mx-10 items-center" action="#">
                     <LabelTelaDeAnuncio nome="Marca" for="inputAnunciarMarca"/>
                     <select className="w-48 h-6 rounded font-archivo font-bold mb-4 informacaoCarro" required id="marca">
                         <OptionTelaDeAnuncio itens={marcas}/>

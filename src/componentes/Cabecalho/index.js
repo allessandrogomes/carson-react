@@ -1,17 +1,17 @@
+import { useState } from "react"
+import Logo from "./Logo"
+import MenuMobile from "./MenuMobile"
+import PesquisaDeVeiculos from "./PesquisaDeVeiculos"
 import BotaoAnunciar from "./BotaoAnunciar"
 import BotaoChat from "./BotaoChat"
 import BotaoEntrar from "./BotaoEntrar"
-import PesquisaDeVeiculos from "./PesquisaDeVeiculos"
-import Logo from "./Logo"
-import MenuMobile from "./MenuMobile"
-import TelaAnuncioPublicado from "./TelaAnuncioPublicado"
-import TelaEsqueciMinhaSenha from "./TelaEsqueciMinhaSenha"
-import { useState } from "react"
 import TelaDeAnuncio from "./TelaDeAnuncio"
-import FundoDesfocado from "./FundoDesfocado"
+import TelaAnuncioPublicado from "./TelaAnuncioPublicado"
 import TelaChat from "./TelaChat"
 import TelaEntrar from "./TelaEntrar"
 import TelaDeCadastro from "./TelaDeCadastro"
+import TelaEsqueciMinhaSenha from "./TelaEsqueciMinhaSenha"
+import FundoDesfocado from "./FundoDesfocado"
 
 
 const Cabecalho = () => {
@@ -21,25 +21,12 @@ const Cabecalho = () => {
     const [telaEntrarVisivel, setTelaEntrarVisivel] = useState(false)
     const [telaDeCadastroVisivel, setTelaDeCadastroVisivel] = useState(false)
     const [telaEsqueciSenhaVisivel, setTelaEsqueciSenhaVisivel] = useState(false)
+    const [telaDeAnuncioPublicadoVisivel, setTelaDeAnuncioPublicadoVisivel] = useState(false)
 
-    const toggleTelaDeAnuncio = () => {
-        setTelaDeAnuncioVisivel((prevState) => !prevState)
-    }
-
-    const toggleTelaChat = () => {
-        setTelaChatVisivel((prevState) => !prevState)
-    }
-
-    const toggleTelaEntrar = () => {
-        setTelaEntrarVisivel((prevState) => !prevState)
-    }
-
-    const toggleTelaDeCadastro = () => {
-        setTelaDeCadastroVisivel((prevState) => !prevState)
-    }
-
-    const toggleTelaEsqueciSenha = () => {
-        setTelaEsqueciSenhaVisivel((prevState) => !prevState)
+    const aoEnviarFormulario = (evento) => {
+        evento.preventDefault()
+        setTelaDeAnuncioVisivel(false)
+        setTelaDeAnuncioPublicadoVisivel(true)
     }
 
     return (
@@ -48,31 +35,37 @@ const Cabecalho = () => {
             <MenuMobile />
             <div id="containerNav" className="navList max-md:w-screen flex justify-around min-w-[550px] w-1/2">
                 <PesquisaDeVeiculos />
-                <BotaoAnunciar onClick={toggleTelaDeAnuncio}/>
-                <BotaoChat onClick={toggleTelaChat}/>
-                <BotaoEntrar onClick={toggleTelaEntrar}/>
+                <BotaoAnunciar onClick={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
+                <BotaoChat onClick={() => setTelaChatVisivel((prevState) => !prevState)}/>
+                <BotaoEntrar onClick={() => setTelaEntrarVisivel((prevState) => !prevState)}/>
             </div>
-            <TelaChat visivel={telaChatVisivel} aoClicarNoX={toggleTelaChat}/>
+            <TelaChat visivel={telaChatVisivel} aoClicarNoX={() => setTelaChatVisivel((prevState) => !prevState)}/>
             {telaDeAnuncioVisivel && (
                 <>
                     <FundoDesfocado />
-                    <TelaDeAnuncio aoClicarNoX={toggleTelaDeAnuncio}/>
+                    <TelaDeAnuncio onSubmit={aoEnviarFormulario} aoClicarNoX={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
                 </>    
             )}
             {telaEntrarVisivel && (
                 <>
                     <FundoDesfocado />
-                    <TelaEntrar aoClicarEsqueciSenha={toggleTelaEsqueciSenha} aoClicarParaCadastrar={toggleTelaDeCadastro} aoClicarNoX={toggleTelaEntrar}/>
+                    <TelaEntrar aoClicarEsqueciSenha={() => setTelaEsqueciSenhaVisivel((prevState) => !prevState)} aoClicarParaCadastrar={() => setTelaDeCadastroVisivel((prevState) => !prevState)} aoClicarNoX={() => setTelaEntrarVisivel((prevState) => !prevState)}/>
                 </>
             )}
             {telaDeCadastroVisivel && (
                 <>
                     <FundoDesfocado />
-                    <TelaDeCadastro aoClicarNoX={toggleTelaDeCadastro}/>
+                    <TelaDeCadastro aoClicarNoX={() => setTelaDeCadastroVisivel((prevState) => !prevState)}/>
                 </>
             )}
-            {telaEsqueciSenhaVisivel && <TelaEsqueciMinhaSenha aoClicarNoX={toggleTelaEsqueciSenha}/>}
-            <TelaAnuncioPublicado />
+            {telaEsqueciSenhaVisivel && <TelaEsqueciMinhaSenha aoClicarNoX={() => setTelaEsqueciSenhaVisivel((prevState) => !prevState)}/>}
+            {telaDeAnuncioPublicadoVisivel && (
+                <>
+                    <FundoDesfocado />
+                    <TelaAnuncioPublicado onClickOk={() => setTelaDeAnuncioPublicadoVisivel(false)}/>
+                </>
+                )
+            }
         </header>
     )
 }
