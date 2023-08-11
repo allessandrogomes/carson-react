@@ -1,4 +1,4 @@
-function TituloFiltro(props) {
+const TituloFiltro = (props) => {
     return (
         <div className="flex pb-4">
             <img className="mr-2" src={`./imagens/Filtros/${props.imagem}`} alt={props.alt} />

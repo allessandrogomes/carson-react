@@ -1,4 +1,4 @@
-function InputAnoEPreco(props) {
+const InputAnoEPreco = (props) => {
     return (
         <div>
             <input

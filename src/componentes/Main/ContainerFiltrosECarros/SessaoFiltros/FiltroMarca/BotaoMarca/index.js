@@ -1,4 +1,4 @@
-function BotaoMarca(props) {
+const BotaoMarca = (props) => {
     return (
         <div className="borda border-color2 filtroMarca h-16 flex flex-col w-12 h-12 mb-4 cursor-pointer">
             <img src={`./imagens/Filtros/${props.imagem}`} alt="" />

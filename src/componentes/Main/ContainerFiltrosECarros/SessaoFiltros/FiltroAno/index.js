@@ -1,7 +1,7 @@
-import InputAnoEPreco from "./InputAnoEPreco/InputAnoEPreco"
-import TituloFiltro from "./TituloFiltro/TituloFiltro"
+import InputAnoEPreco from "../InputAnoEPreco"
+import TituloFiltro from "../TituloFiltro"
 
-function FiltroAno() {
+const FiltroAno = () => {
     return (
         <div>
             <TituloFiltro imagem="icone-calendario.svg" alt="Ícone Calendário" tituloFiltro="Ano"/>

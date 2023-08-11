@@ -1,7 +1,7 @@
-import BotaoMarca from "./BotaoMarca/BotaoMarca"
-import TituloFiltro from "./TituloFiltro/TituloFiltro"
+import BotaoMarca from "./BotaoMarca"
+import TituloFiltro from "../TituloFiltro"
 
-function FiltroMarca() {
+const FiltroMarca = () => {
     return (
         <div>
             <TituloFiltro imagem="icone-marca.svg" alt="Ícone marca" tituloFiltro="Marca"/>

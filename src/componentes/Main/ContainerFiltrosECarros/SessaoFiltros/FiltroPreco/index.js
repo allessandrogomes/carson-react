@@ -1,7 +1,7 @@
-import InputAnoEPreco from "./InputAnoEPreco/InputAnoEPreco"
-import TituloFiltro from "./TituloFiltro/TituloFiltro"
+import InputAnoEPreco from "../InputAnoEPreco"
+import TituloFiltro from "../TituloFiltro"
 
-function FiltroPreco() {
+const FiltroPreco = () => {
     return (
         <div>
             <TituloFiltro imagem="icone-sifrao.svg" alt="Ícone sifrão" tituloFiltro="Preço"/>
