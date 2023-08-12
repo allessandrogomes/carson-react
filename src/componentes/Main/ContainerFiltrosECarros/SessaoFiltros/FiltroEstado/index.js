@@ -3,7 +3,7 @@ import TituloFiltro from "../TituloFiltro"
 import { useEffect, useState } from "react"
 
 const FiltroEstado = (props) => {
-    const estados = ['sp', 'rj', 'mt', 'mg', 'al', 'ba', 'rs', 'ma', 'am', 'to', 'go', 'pi', 'pe', 'ac'] 
+    const estados = ['sp', 'rj', 'mt', 'mg', 'al', 'ba', 'rs', 'ma', 'am', 'to', 'go', 'pi', 'pe', 'ac']
 
     return (
         <div>
