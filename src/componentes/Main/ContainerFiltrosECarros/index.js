@@ -21,6 +21,8 @@ const ContainerFiltrosECarros = () => {
     const [precoAte, setPrecoAte] = useState('')
     const [carrosFiltrados, setCarrosFiltrados] = useState([])
     const [carrosAMostrar, setCarrosAMostrar] = useState([])
+    const [filtrosAtivos, setFiltrosAtivos] = useState([])
+    const [btnsFiltros, setBtnsFiltros] = useState([])
 
     const ednPointDaAPI = 'https://raw.githubusercontent.com/allessandrogomes/carsOn/main/carros.json'
 
@@ -38,6 +40,7 @@ const ContainerFiltrosECarros = () => {
     //Filtra os estados e salva-os na constante estadosFiltrados
     const filtrarEstados = (evento) => {
         const estadoClicado = evento.currentTarget
+        setBtnsFiltros(btnsFiltros.includes(estadoClicado) ? btnsFiltros.filter(btnEstado => btnEstado !== estadoClicado) : [...btnsFiltros, estadoClicado])
         estadoClicado.classList.toggle("border-2")
         const novoEstadoFiltrado = evento.currentTarget.querySelector('h5').textContent
         const estadosAtualizados = estadosFiltrados.includes(novoEstadoFiltrado)
@@ -49,6 +52,7 @@ const ContainerFiltrosECarros = () => {
     //Filtra as cores e salva-as na constante coresFiltradas
     const filtrarCores = (evento) => {
         const corClicada = evento.currentTarget
+        setBtnsFiltros(btnsFiltros.includes(corClicada) ? btnsFiltros.filter(btnCor => btnCor !== corClicada) : [...btnsFiltros, corClicada])
         corClicada.classList.toggle("border-2")
         const novaCorFiltrada = evento.currentTarget.querySelector('h5').textContent
         const coresAtualizadas = coresFiltradas.includes(novaCorFiltrada)
@@ -60,6 +64,7 @@ const ContainerFiltrosECarros = () => {
     //Filtra as marcas e salva-as na constante marcasFiltradas
     const filtrarMarcas = (evento) => {
         const marcaClicada = evento.currentTarget
+        setBtnsFiltros(btnsFiltros.includes(marcaClicada) ? btnsFiltros.filter(btnMarca => btnMarca !== marcaClicada) : [...btnsFiltros, marcaClicada])
         marcaClicada.classList.toggle("border-2")
         const novaMarcaFiltrada = evento.currentTarget.querySelector('h5').textContent
         const marcasAtualizadas = marcasFiltradas.includes(novaMarcaFiltrada)
@@ -104,6 +109,28 @@ const ContainerFiltrosECarros = () => {
         }
     }
 
+    const removerFiltroAoClicarNoX = (evento) => {
+        // Remove borda do botão ao clicar no X
+        btnsFiltros.forEach(btnEstado => {
+            const valorBtnEstado = btnEstado.querySelector('h5').textContent
+            if(valorBtnEstado == evento) {
+                btnEstado.classList.remove("border-2")
+                setBtnsFiltros(btnsFiltros.filter(item => item !== btnEstado))
+            }
+        })
+        // Remove filtro ao clicar no X
+        if(estadosFiltrados.includes(evento)) {
+            const filtroRemovido = estadosFiltrados.filter(item => item !== evento)
+            setEstadosFiltrados(filtroRemovido)
+        } else if(coresFiltradas.includes(evento)) {
+            const filtroRemovido = coresFiltradas.filter(item => item !== evento)
+            setCoresFiltradas(filtroRemovido)
+        } else if(marcasFiltradas.includes(evento)) {
+            const filtroRemovido = marcasFiltradas.filter(item => item !== evento)
+            setMarcasFiltradas(filtroRemovido)
+        }
+    }
+
     //Filtra os carros de acordo com os filtros selecionados e salva na constante carrosFiltrados
     useEffect(() => {
         setCarrosFiltrados(listaDeCarros.filter(function (carro) {
@@ -117,13 +144,13 @@ const ContainerFiltrosECarros = () => {
                     (precoDeSemFormatacao.length === 0 || precoDeSemFormatacao <= carro.preco) &&
                     (precoAteSemFormatacao.length === 0 || precoAteSemFormatacao >= carro.preco || precoAteSemFormatacao == 0)
         }))
+        setFiltrosAtivos([...estadosFiltrados, ...coresFiltradas, ...marcasFiltradas])
     }, [estadosFiltrados, coresFiltradas, marcasFiltradas, anoDe, anoAte, precoDe, precoAte])
 
     //Se existirem carrosFiltrados, serão adicionados na constante carrosAMostrar. Senão, retorna um array vazio na constante carrosAMostrar
     useEffect(() => {
         carrosFiltrados.length > 0 ? setCarrosAMostrar(carrosFiltrados) : setCarrosAMostrar([])
     }, [carrosFiltrados]);
-
     return (
         <div className="divCentral flex">
             <SessaoFiltros>
@@ -134,31 +161,8 @@ const ContainerFiltrosECarros = () => {
                 <FiltroPreco valuePrecoAte={precoAte} onChangeAte={formatacaPrecoAte} valuePrecoDe={precoDe} onChangeDe={formatacaPrecoDe}/>
             </SessaoFiltros>
             <div className="p-8 w-screen bg-color4">
-                <FiltrosAtivos />
-                <SessaoCarros >
-                    {carrosAMostrar.length == 0 ? <h3>Não existe nenhum veículo dentre os filtros selecionados.</h3> : carrosAMostrar.map(carro => {
-                        return (
-                        <div className="carro w-56 m-1 mb-10" key={carro.nome}>
-                            <div className="mb-2 rounded-borde-radius-32px w-56 h-32 bg-no-repeat bg-cover"
-                                style={{backgroundImage: `url(${carro.imagem})`}}>
-                            </div>
-                        <div className="flex text-left">
-                            <div className="w-px h-50 bg-color3"></div>
-                            <div>
-                                <h3 className="nomeCarro ml-4 uppercase mb-1 text-base font-archivo font-bold text-color2">{carro.nome}</h3>
-                                <h4 className="ml-4 mb-1 text-lg font-bold font-big-shoulders-display">R$ {carro.preco}</h4>
-                                <div className="flex mb-3">
-                                    <h4 className="ml-4 mr-6 font-archivo text-sm">{carro.ano}&#47;{carro.ano}</h4>
-                                    <h4 className="font-archivo text-sm">{carro.km}km</h4>
-                                </div>
-                                <h4 className="ml-4 mb-4 font-archivo text-sm capitalize">{carro.cidade} - <span className="estadoCarro uppercase">{carro.estado}</span></h4>
-                                <button
-                                    className="text-color1 font-bold font-archivo ml-4 px-14 py-2 rounded-borde-radius-32px border border-color3">Comprar</button>
-                            </div>
-                        </div>
-                    </div>)
-                    })}
-                </SessaoCarros>
+                <FiltrosAtivos fecharFiltro={removerFiltroAoClicarNoX} filtrosAtivos={filtrosAtivos} />
+                <SessaoCarros carrosAMostrar={carrosAMostrar} />
             </div>
         </div>
     )
