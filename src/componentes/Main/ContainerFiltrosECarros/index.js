@@ -10,7 +10,7 @@ import FiltroMarca from "./SessaoFiltros/FiltroMarca"
 import FiltroAno from "./SessaoFiltros/FiltroAno"
 import FiltroPreco from "./SessaoFiltros/FiltroPreco"
 
-const ContainerFiltrosECarros = () => {
+const ContainerFiltrosECarros = ({ novoAnuncio }) => {
     const [listaDeCarros, setListaDeCarros] = useState([])
     const [estadosFiltrados, setEstadosFiltrados] = useState([])
     const [coresFiltradas, setCoresFiltradas] = useState([])
@@ -25,6 +25,13 @@ const ContainerFiltrosECarros = () => {
     const [btnsFiltros, setBtnsFiltros] = useState([])
 
     const ednPointDaAPI = 'https://raw.githubusercontent.com/allessandrogomes/carsOn/main/carros.json'
+
+    useEffect(() => {
+        if(novoAnuncio != ''){
+            setListaDeCarros([...listaDeCarros, novoAnuncio])
+            setCarrosAMostrar([...carrosAMostrar, novoAnuncio])
+        }
+    }, [novoAnuncio])
 
     //Busca os dados da API e mostra o conteúdo
     useEffect(() => {

@@ -1,8 +1,8 @@
 const OptionTelaDeAnuncio = (props) => {
     return (
-        props.itens.map(marca => {
+        props.itens.map(nome => {
             return (
-                <option key={marca} className="font-archivo capitalize" value={marca}>{marca}</option>
+                <option key={nome} className="font-archivo capitalize" value={nome.toLowerCase()}>{nome}</option>
             )
         })
     )

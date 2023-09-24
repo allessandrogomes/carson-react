@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Logo from "./Logo"
 import MenuMobile from "./MenuMobile"
 import PesquisaDeVeiculos from "./PesquisaDeVeiculos"
@@ -14,7 +14,7 @@ import TelaEsqueciMinhaSenha from "./TelaEsqueciMinhaSenha"
 import FundoDesfocado from "./FundoDesfocado"
 
 
-const Cabecalho = () => {
+const Cabecalho = ({ novoAnuncio }) => {
 
     const [telaDeAnuncioVisivel, setTelaDeAnuncioVisivel] = useState(false)
     const [telaChatVisivel, setTelaChatVisivel] = useState(false)
@@ -22,12 +22,16 @@ const Cabecalho = () => {
     const [telaDeCadastroVisivel, setTelaDeCadastroVisivel] = useState(false)
     const [telaEsqueciSenhaVisivel, setTelaEsqueciSenhaVisivel] = useState(false)
     const [telaDeAnuncioPublicadoVisivel, setTelaDeAnuncioPublicadoVisivel] = useState(false)
+    const [dadosNovoAnuncio, setDadosNovoAnuncio] = useState('')
 
-    const aoEnviarFormulario = (evento) => {
-        evento.preventDefault()
-        setTelaDeAnuncioVisivel(false)
-        setTelaDeAnuncioPublicadoVisivel(true)
-    }
+
+    useEffect(() => {
+        if (dadosNovoAnuncio.length != ''){
+            novoAnuncio(dadosNovoAnuncio)
+            setTelaDeAnuncioVisivel(false)
+            setTelaDeAnuncioPublicadoVisivel(true)
+        }
+    }, [dadosNovoAnuncio])
 
     return (
         <header className="max-md:fixed w-full h-28 bg-teal-400 flex justify-around items-center">
@@ -43,7 +47,9 @@ const Cabecalho = () => {
             {telaDeAnuncioVisivel && (
                 <>
                     <FundoDesfocado />
-                    <TelaDeAnuncio onSubmit={aoEnviarFormulario} aoClicarNoX={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
+                    <TelaDeAnuncio  
+                        dadosNovoAnuncio={dados => setDadosNovoAnuncio(dados)}
+                        aoClicarNoX={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
                 </>    
             )}
             {telaEntrarVisivel && (
