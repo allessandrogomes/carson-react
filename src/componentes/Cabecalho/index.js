@@ -14,7 +14,7 @@ import TelaEsqueciMinhaSenha from "./TelaEsqueciMinhaSenha"
 import FundoDesfocado from "./FundoDesfocado"
 
 
-const Cabecalho = ({ novoAnuncio }) => {
+const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSugeridoClicado, aoPesquisarLupa }) => {
 
     const [telaDeAnuncioVisivel, setTelaDeAnuncioVisivel] = useState(false)
     const [telaChatVisivel, setTelaChatVisivel] = useState(false)
@@ -38,7 +38,12 @@ const Cabecalho = ({ novoAnuncio }) => {
             <Logo />
             <MenuMobile />
             <div id="containerNav" className="navList max-md:w-screen flex justify-around min-w-[550px] w-1/2">
-                <PesquisaDeVeiculos />
+                <PesquisaDeVeiculos
+                    aoPesquisarLupa={aoPesquisarLupa}
+                    veiculoSugeridoClicado={veiculoSugeridoClicado}
+                    aoPesquisarVeiculo={(e) => aoPesquisarVeiculo(e)}
+                    listaDeSugestao={listaDeSugestao}
+                />
                 <BotaoAnunciar onClick={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
                 <BotaoChat onClick={() => setTelaChatVisivel((prevState) => !prevState)}/>
                 <BotaoEntrar onClick={() => setTelaEntrarVisivel((prevState) => !prevState)}/>
@@ -60,7 +65,6 @@ const Cabecalho = ({ novoAnuncio }) => {
             )}
             {telaDeCadastroVisivel && (
                 <>
-                    <FundoDesfocado />
                     <TelaDeCadastro aoClicarNoX={() => setTelaDeCadastroVisivel((prevState) => !prevState)}/>
                 </>
             )}

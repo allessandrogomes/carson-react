@@ -1,7 +1,7 @@
 const SessaoCarros = ({carrosAMostrar}) => {
     return (
         <section className="flex justify-around flex-wrap" id="sessao-carros">
-            {carrosAMostrar.length == 0 ? <h3>Não existe nenhum veículo dentre os filtros selecionados.</h3> : carrosAMostrar.map(carro => {
+            {carrosAMostrar.length == 0 ? <h3>Não existe nenhum veículo dentre os pré-requisitos selecionados.</h3> : carrosAMostrar.map(carro => {
                 return (
                     <div className="carro w-56 m-1 mb-10" key={carro.nome}>
                             <div className="mb-2 rounded-borde-radius-32px w-56 h-32 bg-no-repeat bg-cover"

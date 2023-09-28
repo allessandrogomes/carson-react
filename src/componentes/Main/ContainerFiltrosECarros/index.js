@@ -10,7 +10,7 @@ import FiltroMarca from "./SessaoFiltros/FiltroMarca"
 import FiltroAno from "./SessaoFiltros/FiltroAno"
 import FiltroPreco from "./SessaoFiltros/FiltroPreco"
 
-const ContainerFiltrosECarros = ({ novoAnuncio }) => {
+const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao, veiculoSugeridoClicado, aoPesquisarLupa }) => {
     const [listaDeCarros, setListaDeCarros] = useState([])
     const [estadosFiltrados, setEstadosFiltrados] = useState([])
     const [coresFiltradas, setCoresFiltradas] = useState([])
@@ -26,8 +26,35 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
 
     const ednPointDaAPI = 'https://raw.githubusercontent.com/allessandrogomes/carsOn/main/carros.json'
 
+    // Mostra veículos pesquisados por meio da lupa
     useEffect(() => {
-        if(novoAnuncio != ''){
+        if(aoPesquisarLupa) {
+            let veiculosFiltrados = listaDeCarros.filter(carro => carro.nome.includes(pesquisaVeiculo))
+            setCarrosAMostrar(veiculosFiltrados)
+        }
+    }, [aoPesquisarLupa])
+
+    // Mostra veículo selecionado da lista de sugestão
+    useEffect(() => {
+        if(veiculoSugeridoClicado.textContent != ''){
+            let carroPesquisadoFiltrado = listaDeCarros.filter(carro => carro.nome.includes(veiculoSugeridoClicado.target.textContent))
+            setCarrosAMostrar(carroPesquisadoFiltrado)
+        }
+    }, [veiculoSugeridoClicado])
+
+    //Mostra lista de sugestão ao digitar no input de pesquisa
+    useEffect(() => {
+        if (pesquisaVeiculo.length !== 0) {
+            const sugestoes = listaDeCarros.filter(carro => carro.nome.includes(pesquisaVeiculo));
+            listaDeSugestao(sugestoes)
+        } else {
+            listaDeSugestao([])
+        }
+    }, [pesquisaVeiculo])
+
+    //Mostra novo veículo anunciado
+    useEffect(() => {
+        if (novoAnuncio != '') {
             setListaDeCarros([...listaDeCarros, novoAnuncio])
             setCarrosAMostrar([...carrosAMostrar, novoAnuncio])
         }
@@ -51,8 +78,8 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         estadoClicado.classList.toggle("border-2")
         const novoEstadoFiltrado = evento.currentTarget.querySelector('h5').textContent
         const estadosAtualizados = estadosFiltrados.includes(novoEstadoFiltrado)
-        ? estadosFiltrados.filter(estado => estado !== novoEstadoFiltrado)
-        : [...estadosFiltrados, novoEstadoFiltrado]
+            ? estadosFiltrados.filter(estado => estado !== novoEstadoFiltrado)
+            : [...estadosFiltrados, novoEstadoFiltrado]
         setEstadosFiltrados(estadosAtualizados)
     }
 
@@ -63,8 +90,8 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         corClicada.classList.toggle("border-2")
         const novaCorFiltrada = evento.currentTarget.querySelector('h5').textContent
         const coresAtualizadas = coresFiltradas.includes(novaCorFiltrada)
-        ? coresFiltradas.filter(cor => cor !== novaCorFiltrada)
-        : [...coresFiltradas, novaCorFiltrada]
+            ? coresFiltradas.filter(cor => cor !== novaCorFiltrada)
+            : [...coresFiltradas, novaCorFiltrada]
         setCoresFiltradas(coresAtualizadas)
     }
 
@@ -75,8 +102,8 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         marcaClicada.classList.toggle("border-2")
         const novaMarcaFiltrada = evento.currentTarget.querySelector('h5').textContent
         const marcasAtualizadas = marcasFiltradas.includes(novaMarcaFiltrada)
-        ? marcasFiltradas.filter(marca => marca !== novaMarcaFiltrada)
-        : [...marcasFiltradas, novaMarcaFiltrada]
+            ? marcasFiltradas.filter(marca => marca !== novaMarcaFiltrada)
+            : [...marcasFiltradas, novaMarcaFiltrada]
         setMarcasFiltradas(marcasAtualizadas)
     }
 
@@ -85,7 +112,7 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         const valor = evento.target.value.replace(/\D/g, '')
         const valorInteiro = parseInt(valor, 10)
 
-        if(isNaN(valorInteiro)) {
+        if (isNaN(valorInteiro)) {
             setPrecoDe('')
         } else {
             const valorFormatado = valorInteiro.toLocaleString('pt-BR', {
@@ -103,7 +130,7 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         const valor = evento.target.value.replace(/\D/g, '')
         const valorInteiro = parseInt(valor, 10)
 
-        if(isNaN(valorInteiro)) {
+        if (isNaN(valorInteiro)) {
             setPrecoAte('')
         } else {
             const valorFormatado = valorInteiro.toLocaleString('pt-BR', {
@@ -120,19 +147,19 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
         // Remove borda do botão ao clicar no X
         btnsFiltros.forEach(btnEstado => {
             const valorBtnEstado = btnEstado.querySelector('h5').textContent
-            if(valorBtnEstado == evento) {
+            if (valorBtnEstado == evento) {
                 btnEstado.classList.remove("border-2")
                 setBtnsFiltros(btnsFiltros.filter(item => item !== btnEstado))
             }
         })
         // Remove filtro ao clicar no X
-        if(estadosFiltrados.includes(evento)) {
+        if (estadosFiltrados.includes(evento)) {
             const filtroRemovido = estadosFiltrados.filter(item => item !== evento)
             setEstadosFiltrados(filtroRemovido)
-        } else if(coresFiltradas.includes(evento)) {
+        } else if (coresFiltradas.includes(evento)) {
             const filtroRemovido = coresFiltradas.filter(item => item !== evento)
             setCoresFiltradas(filtroRemovido)
-        } else if(marcasFiltradas.includes(evento)) {
+        } else if (marcasFiltradas.includes(evento)) {
             const filtroRemovido = marcasFiltradas.filter(item => item !== evento)
             setMarcasFiltradas(filtroRemovido)
         }
@@ -144,12 +171,12 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
             const precoDeSemFormatacao = precoDe.replace(/\./g, "")
             const precoAteSemFormatacao = precoAte.replace(/\./g, "")
             return (estadosFiltrados.length === 0 || estadosFiltrados.includes(carro.estado)) &&
-                    (coresFiltradas.length === 0 || coresFiltradas.includes(carro.cor)) &&
-                    (marcasFiltradas.length === 0 || marcasFiltradas.includes(carro.marca)) &&
-                    (anoDe.length === 0 || anoDe <= carro.ano) &&
-                    (anoAte.length === 0 || anoAte >= carro.ano || anoAte == 0) &&
-                    (precoDeSemFormatacao.length === 0 || precoDeSemFormatacao <= carro.preco) &&
-                    (precoAteSemFormatacao.length === 0 || precoAteSemFormatacao >= carro.preco || precoAteSemFormatacao == 0)
+                (coresFiltradas.length === 0 || coresFiltradas.includes(carro.cor)) &&
+                (marcasFiltradas.length === 0 || marcasFiltradas.includes(carro.marca)) &&
+                (anoDe.length === 0 || anoDe <= carro.ano) &&
+                (anoAte.length === 0 || anoAte >= carro.ano || anoAte == 0) &&
+                (precoDeSemFormatacao.length === 0 || precoDeSemFormatacao <= carro.preco) &&
+                (precoAteSemFormatacao.length === 0 || precoAteSemFormatacao >= carro.preco || precoAteSemFormatacao == 0)
         }))
         setFiltrosAtivos([...estadosFiltrados, ...coresFiltradas, ...marcasFiltradas])
     }, [estadosFiltrados, coresFiltradas, marcasFiltradas, anoDe, anoAte, precoDe, precoAte])
@@ -161,11 +188,11 @@ const ContainerFiltrosECarros = ({ novoAnuncio }) => {
     return (
         <div className="divCentral flex">
             <SessaoFiltros>
-                <FiltroEstado onClick={filtrarEstados}/>
-                <FiltroCor onClick={filtrarCores}/>
-                <FiltroMarca onClick={filtrarMarcas}/>
-                <FiltroAno valueAte={anoAte} valueDe={anoDe} onChangeAte={(evento) => setAnoAte(evento.target.value.replace(/\D/g, ''))} onChangeDe={(evento) => setAnoDe(evento.target.value.replace(/\D/g, ''))}/>
-                <FiltroPreco valuePrecoAte={precoAte} onChangeAte={formatacaPrecoAte} valuePrecoDe={precoDe} onChangeDe={formatacaPrecoDe}/>
+                <FiltroEstado onClick={filtrarEstados} />
+                <FiltroCor onClick={filtrarCores} />
+                <FiltroMarca onClick={filtrarMarcas} />
+                <FiltroAno valueAte={anoAte} valueDe={anoDe} onChangeAte={(evento) => setAnoAte(evento.target.value.replace(/\D/g, ''))} onChangeDe={(evento) => setAnoDe(evento.target.value.replace(/\D/g, ''))} />
+                <FiltroPreco valuePrecoAte={precoAte} onChangeAte={formatacaPrecoAte} valuePrecoDe={precoDe} onChangeDe={formatacaPrecoDe} />
             </SessaoFiltros>
             <div className="p-8 w-screen bg-color4">
                 <FiltrosAtivos fecharFiltro={removerFiltroAoClicarNoX} filtrosAtivos={filtrosAtivos} />
