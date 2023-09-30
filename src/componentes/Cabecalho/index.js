@@ -23,6 +23,9 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
     const [telaEsqueciSenhaVisivel, setTelaEsqueciSenhaVisivel] = useState(false)
     const [telaDeAnuncioPublicadoVisivel, setTelaDeAnuncioPublicadoVisivel] = useState(false)
     const [dadosNovoAnuncio, setDadosNovoAnuncio] = useState('')
+    const [menuMobileAtivo, setMenuMobileAtivo] = useState(false)
+    const [navListTranslateXValue, setNavListTranslateXValue] = useState('full')
+    const [valorOpacidadeLinks, setValorOpacidadeLinks] = useState('0')
 
 
     useEffect(() => {
@@ -33,20 +36,54 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
         }
     }, [dadosNovoAnuncio])
 
+    useEffect(() => {
+        if(menuMobileAtivo) {
+            setNavListTranslateXValue('0px')
+            setValorOpacidadeLinks('100')
+        } else {
+            setNavListTranslateXValue('full')
+            setValorOpacidadeLinks('0')
+        }
+    }, [menuMobileAtivo])
+
+    const menuMobileToggle = () => {
+        setMenuMobileAtivo(prevState => !prevState)
+    }
+
+    const pesquisarLupa = (e) => {
+        aoPesquisarLupa(e)
+        setMenuMobileAtivo(false)
+    }
+    
+    const clicarSugestaoPesquisa = (e) => {
+        veiculoSugeridoClicado(e)
+        setMenuMobileAtivo(false)
+    }
+
     return (
         <header className="max-md:fixed w-full h-28 bg-teal-400 flex justify-around items-center">
             <Logo />
-            <MenuMobile />
-            <div id="containerNav" className="navList max-md:w-screen flex justify-around min-w-[550px] w-1/2">
+            <MenuMobile aoClicarMenuMobile={menuMobileToggle}/>
+            <div id="containerNav" className={`navList max-md:translate-x-${navListTranslateXValue} max-md:w-screen flex justify-around min-w-[550px] w-1/2`}>
                 <PesquisaDeVeiculos
-                    aoPesquisarLupa={aoPesquisarLupa}
-                    veiculoSugeridoClicado={veiculoSugeridoClicado}
+                    valorOpacidade={valorOpacidadeLinks}
+                    aoPesquisarLupa={pesquisarLupa}
+                    veiculoSugeridoClicado={clicarSugestaoPesquisa}
                     aoPesquisarVeiculo={(e) => aoPesquisarVeiculo(e)}
                     listaDeSugestao={listaDeSugestao}
                 />
-                <BotaoAnunciar onClick={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}/>
-                <BotaoChat onClick={() => setTelaChatVisivel((prevState) => !prevState)}/>
-                <BotaoEntrar onClick={() => setTelaEntrarVisivel((prevState) => !prevState)}/>
+                <BotaoAnunciar
+                    valorOpacidade={valorOpacidadeLinks}
+                    onClick={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}
+                />
+                <BotaoChat
+                    valorOpacidade={valorOpacidadeLinks}
+                    onClick={() => setTelaChatVisivel((prevState) => !prevState)}
+                />
+                <BotaoEntrar
+                    valorOpacidade={valorOpacidadeLinks}
+                    onClick={() => setTelaEntrarVisivel((prevState) => !prevState)}
+                />
             </div>
             <TelaChat visivel={telaChatVisivel} aoClicarNoX={() => setTelaChatVisivel((prevState) => !prevState)}/>
             {telaDeAnuncioVisivel && (

@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Cabecalho
-      aoPesquisarLupa={clique => setAoPesquisarLupa(clique)}
+        aoPesquisarLupa={clique => setAoPesquisarLupa(clique)}
         veiculoSugeridoClicado={veiculo => setVeiculoSugeridoClicado(veiculo)}
         novoAnuncio={novoAnuncio => {
           novoAnuncio.nome = novoAnuncio.nome.toLowerCase()

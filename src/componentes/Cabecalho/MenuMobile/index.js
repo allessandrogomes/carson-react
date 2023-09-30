@@ -1,9 +1,11 @@
-const MenuMobile = () => {
+import LinhaDiv from "./LinhaDiv"
+
+const MenuMobile = ({ aoClicarMenuMobile }) => {
     return (
-        <div className="max-md:block cursor-pointer hidden" id="mobileMenu">
-            <div className="w-8 h-0.5 bg-white m-2 transition ease-in" id="line1"></div>
-            <div className="w-8 h-0.5 bg-white m-2 transition ease-in" id="line2"></div>
-            <div className="w-8 h-0.5 bg-white m-2 transition ease-in" id="line3"></div>
+        <div onClick={aoClicarMenuMobile} className="max-md:block cursor-pointer hidden" id="mobileMenu">
+            <LinhaDiv id="line1"/>
+            <LinhaDiv id="line2"/>
+            <LinhaDiv id="line3"/>
         </div>
     )
 }

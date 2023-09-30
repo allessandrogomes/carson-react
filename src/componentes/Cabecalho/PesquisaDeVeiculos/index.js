@@ -1,23 +1,54 @@
+import { useState } from "react"
 import ListaDeSugestao from "./ListaDeSugestao"
 
-const PesquisaDeVeiculos = ({ listaDeSugestao, aoPesquisarVeiculo, veiculoSugeridoClicado, aoPesquisarLupa }) => {
+
+const PesquisaDeVeiculos = ({ listaDeSugestao, aoPesquisarVeiculo, veiculoSugeridoClicado, aoPesquisarLupa, valorOpacidade }) => {
+
+    const [valorInputPesquisa, setValorInputPesquisa] = useState('')
+    const [ocultarListaDeSugestao, setOcultarListaDeSugestao] = useState(false)
+
+    const aoDigitarInput = (e) => {
+        aoPesquisarVeiculo(e)
+        setValorInputPesquisa(e.target.value)
+        setOcultarListaDeSugestao(false)
+    }
+
+    const aoClicarNaLupa = (e) => {
+        aoPesquisarLupa(e)
+        limparPesquisa()
+    }
+
+    const aoClicarNaSugestao = (e) => {
+        veiculoSugeridoClicado(e)
+        limparPesquisa()
+    }
+
+    const limparPesquisa = () => {
+        setValorInputPesquisa('')
+        setOcultarListaDeSugestao(true)
+    }
+
     return (
-        <div className="navListLi w-1/2 items-center h-12" id="divInputDePesquisa">
+        <div className={`navListLi max-md:opacity-${valorOpacidade} w-1/2 items-center h-12 transition delay-75 ease-in-out`} id="divInputDePesquisa">
             <div className="flex items-center ">
                 <input
-                    onChange={aoPesquisarVeiculo}
+                    value={valorInputPesquisa}
+                    onChange={aoDigitarInput}
                     className="w-full h-12 rounded-full p-4 font-archivo text-sm outline-none"
-                    placeholder="Digite um modelo ou marca..." type="text" style={{ backgroundPositionX: '95%'}}
+                    placeholder="Digite um modelo ou marca..." type="text" style={{ backgroundPositionX: '95%' }}
                     id="barraDePesquisa"
                 />
 
-                <a onClick={aoPesquisarLupa} href="#" className="text-gray-600 hover:text-gray-800 relative right-7">
+                <a onClick={aoClicarNaLupa} href="#" className="text-gray-600 hover:text-gray-800 relative right-7">
                     <img className="bg-white" src="./imagens/Cabecalho/lupa.svg" alt="Imagem de Lupa de pesquisa"
                         id="lupaDePesquisa" />
                 </a>
             </div>
-            <ul id="listaDeSugestao">
-                <ListaDeSugestao veiculoSugeridoClicado={veiculoSugeridoClicado} listaDeSugestao={listaDeSugestao}/>
+            <ul className={`${ocultarListaDeSugestao ? 'hidden' : ''} overflow-y-auto left-[5%] relative w-4/5 max-h-[304px]`} id="listaDeSugestao">
+                <ListaDeSugestao 
+                    veiculoSugeridoClicado={aoClicarNaSugestao} 
+                    listaDeSugestao={listaDeSugestao} 
+                />
             </ul>
         </div>
     )
