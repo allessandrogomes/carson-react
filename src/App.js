@@ -1,4 +1,4 @@
-import './responsive.css';
+import './responsive.css'
 import Cabecalho from './componentes/Cabecalho';
 import Main from './componentes/Main';
 import Chamada from './componentes/Main/Chamada';
