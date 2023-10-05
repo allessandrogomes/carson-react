@@ -1,6 +1,6 @@
-const BtnAbrirFiltrosMobile = ({ abrirFiltros }) => {
+const BtnAbrirFiltrosMobile = ({ abrirFiltros, classeAtivo }) => {
     return (
-        <button onClick={abrirFiltros} id="btnAbrirFiltrosMobile" className="hidden cursor-pointer">Filtros</button>
+        <button onClick={abrirFiltros} id="btnAbrirFiltrosMobile" className={`${classeAtivo} hidden cursor-pointer`}>Filtros</button>
     )
 }
 

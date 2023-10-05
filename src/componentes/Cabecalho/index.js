@@ -40,18 +40,21 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
 
     const pesquisarLupa = (e) => {
         aoPesquisarLupa(e)
-        setMenuMobileAtivo(false)
+        setMenuMobileAtivo('')
     }
     
     const clicarSugestaoPesquisa = (e) => {
         veiculoSugeridoClicado(e)
-        setMenuMobileAtivo(false)
+        setMenuMobileAtivo('')
     }
 
     return (
         <header className="max-md:fixed max-md:z-[2] w-full bg-teal-400 h-28 flex justify-around items-center">
             <Logo />
-            <MenuMobile aoClicarMenuMobile={menuMobileToggle}/>
+            <MenuMobile 
+                aoClicarMenuMobile={menuMobileToggle}
+                classeAtivo={menuMobileAtivo}
+            />
             <div id="containerNav" className={`navList ${menuMobileAtivo} max-md:w-screen flex justify-around min-w-[550px] w-1/2`}>
                 <PesquisaDeVeiculos
                     opacidadeNavLi={menuMobileAtivo}

@@ -1,5 +1,4 @@
 import BtnAbrirFiltrosMobile from "./BtnAbrirFiltrosMobile"
-import FundoDesfocadoFiltros from "./FundoDesfocadoFiltros"
 import FiltrosAtivos from "./FiltrosAtivos"
 import SessaoCarros from "./SessaoCarros"
 import SessaoFiltros from "./SessaoFiltros"
@@ -10,6 +9,8 @@ import FiltroMarca from "./SessaoFiltros/FiltroMarca"
 import FiltroAno from "./SessaoFiltros/FiltroAno"
 import FiltroPreco from "./SessaoFiltros/FiltroPreco"
 import MenuMobile from "../../Cabecalho/MenuMobile"
+import FundoDesfocado from "../../Cabecalho/FundoDesfocado"
+import FundoDesfocadoFiltros from "./FundoDesfocadoFiltros"
 
 const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao, veiculoSugeridoClicado, aoPesquisarLupa }) => {
     const [listaDeCarros, setListaDeCarros] = useState([])
@@ -24,12 +25,12 @@ const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao
     const [carrosAMostrar, setCarrosAMostrar] = useState([])
     const [filtrosAtivos, setFiltrosAtivos] = useState([])
     const [btnsFiltros, setBtnsFiltros] = useState([])
-    const [abrirFiltros, setAbrirFiltros] = useState('')
+    const [classeAtivo, setClasseAtivo] = useState('')
 
     const ednPointDaAPI = 'https://raw.githubusercontent.com/allessandrogomes/carsOn/main/carros.json'
 
     const abrirFiltrosToggle = () => {
-        abrirFiltros === '' ? setAbrirFiltros('ativo') : setAbrirFiltros('')
+        classeAtivo === '' ? setClasseAtivo('ativo') : setClasseAtivo('')
     }
 
     // Mostra veículos pesquisados por meio da lupa
@@ -193,8 +194,12 @@ const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao
     }, [carrosFiltrados]);
     return (
         <div className="divCentral flex">
-            <BtnAbrirFiltrosMobile abrirFiltros={abrirFiltrosToggle}/>
-            <SessaoFiltros filtrosAbertos={abrirFiltros}>
+            {classeAtivo === 'ativo' ? <FundoDesfocadoFiltros /> : ''}
+            <BtnAbrirFiltrosMobile 
+                abrirFiltros={abrirFiltrosToggle}
+                classeAtivo={classeAtivo}
+            />
+            <SessaoFiltros filtrosAbertos={classeAtivo}>
                 <FiltroEstado onClick={filtrarEstados} />
                 <FiltroCor onClick={filtrarCores} />
                 <FiltroMarca onClick={filtrarMarcas} />
