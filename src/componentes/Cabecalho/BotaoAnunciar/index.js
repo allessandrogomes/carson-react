@@ -1,9 +1,9 @@
-const BotaoAnunciar = ({ onClick, valorOpacidade }) => {    
+const BotaoAnunciar = ({ onClick, opacidadeNavLi }) => {    
     return (
         <div>
             <button
             onClick={onClick}
-            className={`zIndex max-md:opacity-${valorOpacidade} navListLi bg-white h-12 w-32 rounded-full text-teal-400 font-bold hover:text-teal-500 transition delay-75 ease-in-out`}
+            className={`zIndex ${opacidadeNavLi} navListLi bg-white h-12 w-32 rounded-full text-teal-400 font-bold hover:text-teal-500 transition`}
             id="botaoAnunciar">
             Anunciar
             </button>

@@ -1,4 +1,4 @@
-import './responsive.css'
+import './styles.css'
 import Cabecalho from './componentes/Cabecalho';
 import Main from './componentes/Main';
 import Chamada from './componentes/Main/Chamada';
@@ -16,7 +16,7 @@ function App() {
   const [aoPesquisarLupa, setAoPesquisarLupa] = useState()
 
   return (
-    <div className="App">
+    <div className="App overflow-x-hidden">
       <Cabecalho
         aoPesquisarLupa={clique => setAoPesquisarLupa(clique)}
         veiculoSugeridoClicado={veiculo => setVeiculoSugeridoClicado(veiculo)}

@@ -9,6 +9,7 @@ import FiltroCor from "./SessaoFiltros/FiltroCor"
 import FiltroMarca from "./SessaoFiltros/FiltroMarca"
 import FiltroAno from "./SessaoFiltros/FiltroAno"
 import FiltroPreco from "./SessaoFiltros/FiltroPreco"
+import MenuMobile from "../../Cabecalho/MenuMobile"
 
 const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao, veiculoSugeridoClicado, aoPesquisarLupa }) => {
     const [listaDeCarros, setListaDeCarros] = useState([])
@@ -23,8 +24,13 @@ const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao
     const [carrosAMostrar, setCarrosAMostrar] = useState([])
     const [filtrosAtivos, setFiltrosAtivos] = useState([])
     const [btnsFiltros, setBtnsFiltros] = useState([])
+    const [abrirFiltros, setAbrirFiltros] = useState('')
 
     const ednPointDaAPI = 'https://raw.githubusercontent.com/allessandrogomes/carsOn/main/carros.json'
+
+    const abrirFiltrosToggle = () => {
+        abrirFiltros === '' ? setAbrirFiltros('ativo') : setAbrirFiltros('')
+    }
 
     // Mostra veículos pesquisados por meio da lupa
     useEffect(() => {
@@ -187,7 +193,8 @@ const ContainerFiltrosECarros = ({ novoAnuncio, pesquisaVeiculo, listaDeSugestao
     }, [carrosFiltrados]);
     return (
         <div className="divCentral flex">
-            <SessaoFiltros>
+            <BtnAbrirFiltrosMobile abrirFiltros={abrirFiltrosToggle}/>
+            <SessaoFiltros filtrosAbertos={abrirFiltros}>
                 <FiltroEstado onClick={filtrarEstados} />
                 <FiltroCor onClick={filtrarCores} />
                 <FiltroMarca onClick={filtrarMarcas} />

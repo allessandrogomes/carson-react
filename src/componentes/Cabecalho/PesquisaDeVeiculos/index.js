@@ -2,7 +2,7 @@ import { useState } from "react"
 import ListaDeSugestao from "./ListaDeSugestao"
 
 
-const PesquisaDeVeiculos = ({ listaDeSugestao, aoPesquisarVeiculo, veiculoSugeridoClicado, aoPesquisarLupa, valorOpacidade }) => {
+const PesquisaDeVeiculos = ({ listaDeSugestao, aoPesquisarVeiculo, veiculoSugeridoClicado, aoPesquisarLupa, opacidadeNavLi }) => {
 
     const [valorInputPesquisa, setValorInputPesquisa] = useState('')
     const [ocultarListaDeSugestao, setOcultarListaDeSugestao] = useState(false)
@@ -29,7 +29,7 @@ const PesquisaDeVeiculos = ({ listaDeSugestao, aoPesquisarVeiculo, veiculoSugeri
     }
 
     return (
-        <div className={`navListLi max-md:opacity-${valorOpacidade} w-1/2 items-center h-12 transition delay-75 ease-in-out`} id="divInputDePesquisa">
+        <div className={`navListLi ${opacidadeNavLi} w-1/2 items-center h-12 transition`} id="divInputDePesquisa">
             <div className="flex items-center ">
                 <input
                     value={valorInputPesquisa}

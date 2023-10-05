@@ -1,7 +1,4 @@
 const FiltrosAtivos = (props) => {
-
-    
-
     return (
         <div className="filtroSessao max-w-90% justify-start flex flex-wrap items-center text-color3 p-6 font-archivo mb-6 rounded-full border bg-color4"
             id="btnFiltroSessao">
@@ -13,7 +10,9 @@ const FiltrosAtivos = (props) => {
                 return (
                     <div key={filtroAtivo} className="btnFiltroFilho estado flex m-2 justify-between px-2.5 items-center w-32 h-10 bg-white text-center rounded-full shadow-md">
                             <p className="valorFiltro valorFiltroEstado text-xs uppercase">{filtroAtivo}</p>
-                            <button onClick={identificaFiltroClicado} className="btnRemoverFiltro"><img src="./imagens/filtros/btn-remover.svg" alt="" /></button>
+                            <button onClick={identificaFiltroClicado} className="btnRemoverFiltro">
+                                <img src="./imagens/Filtros/btn-remover.svg" alt="" />
+                            </button>
                     </div>
                 )
             })}

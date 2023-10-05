@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Logo from "./Logo"
 import MenuMobile from "./MenuMobile"
 import PesquisaDeVeiculos from "./PesquisaDeVeiculos"
@@ -23,9 +23,7 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
     const [telaEsqueciSenhaVisivel, setTelaEsqueciSenhaVisivel] = useState(false)
     const [telaDeAnuncioPublicadoVisivel, setTelaDeAnuncioPublicadoVisivel] = useState(false)
     const [dadosNovoAnuncio, setDadosNovoAnuncio] = useState('')
-    const [menuMobileAtivo, setMenuMobileAtivo] = useState(false)
-    const [navListTranslateXValue, setNavListTranslateXValue] = useState('full')
-    const [valorOpacidadeLinks, setValorOpacidadeLinks] = useState('0')
+    const [menuMobileAtivo, setMenuMobileAtivo] = useState('')
 
 
     useEffect(() => {
@@ -36,18 +34,8 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
         }
     }, [dadosNovoAnuncio])
 
-    useEffect(() => {
-        if(menuMobileAtivo) {
-            setNavListTranslateXValue('0px')
-            setValorOpacidadeLinks('100')
-        } else {
-            setNavListTranslateXValue('full')
-            setValorOpacidadeLinks('0')
-        }
-    }, [menuMobileAtivo])
-
     const menuMobileToggle = () => {
-        setMenuMobileAtivo(prevState => !prevState)
+        menuMobileAtivo === '' ? setMenuMobileAtivo('ativo') : setMenuMobileAtivo('')
     }
 
     const pesquisarLupa = (e) => {
@@ -61,27 +49,27 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
     }
 
     return (
-        <header className="max-md:fixed w-full h-28 bg-teal-400 flex justify-around items-center">
+        <header className="max-md:fixed max-md:z-[2] w-full bg-teal-400 h-28 flex justify-around items-center">
             <Logo />
             <MenuMobile aoClicarMenuMobile={menuMobileToggle}/>
-            <div id="containerNav" className={`navList max-md:translate-x-${navListTranslateXValue} max-md:w-screen flex justify-around min-w-[550px] w-1/2`}>
+            <div id="containerNav" className={`navList ${menuMobileAtivo} max-md:w-screen flex justify-around min-w-[550px] w-1/2`}>
                 <PesquisaDeVeiculos
-                    valorOpacidade={valorOpacidadeLinks}
+                    opacidadeNavLi={menuMobileAtivo}
                     aoPesquisarLupa={pesquisarLupa}
                     veiculoSugeridoClicado={clicarSugestaoPesquisa}
                     aoPesquisarVeiculo={(e) => aoPesquisarVeiculo(e)}
                     listaDeSugestao={listaDeSugestao}
                 />
                 <BotaoAnunciar
-                    valorOpacidade={valorOpacidadeLinks}
+                    opacidadeNavLi={menuMobileAtivo}
                     onClick={() => setTelaDeAnuncioVisivel((prevState) => !prevState)}
                 />
                 <BotaoChat
-                    valorOpacidade={valorOpacidadeLinks}
+                    opacidadeNavLi={menuMobileAtivo}
                     onClick={() => setTelaChatVisivel((prevState) => !prevState)}
                 />
                 <BotaoEntrar
-                    valorOpacidade={valorOpacidadeLinks}
+                    opacidadeNavLi={menuMobileAtivo}
                     onClick={() => setTelaEntrarVisivel((prevState) => !prevState)}
                 />
             </div>

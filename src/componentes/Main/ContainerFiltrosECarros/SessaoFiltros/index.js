@@ -4,9 +4,9 @@ import FiltroEstado from "./FiltroEstado"
 import FiltroMarca from "./FiltroMarca"
 import FiltroPreco from "./FiltroPreco"
 
-function SessaoFiltros({children}) {
+function SessaoFiltros({ children, filtrosAbertos }) {
     return (
-        <section className="sectionFiltros max-md:w-full w-width-340px flex flex-col m-6">
+        <section className={`sectionFiltros ${filtrosAbertos} w-width-340px flex flex-col m-6`}>
             {children}
         </section>
     )
