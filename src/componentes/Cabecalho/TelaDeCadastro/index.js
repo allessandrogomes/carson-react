@@ -98,7 +98,7 @@ const TelaDeCadastro = ({ aoClicarNoX }) => {
 
                 <LabelTelaDeCadastro nome="Nascimento" for="cadastroNascimento"/>
                 <InputTelaDeCadastro value={valorInputNascimento} onChange={evento => setValorInputNascimento(evento.target.value)} onBlur={verificaIdade} border={mensagemMenorDeIdade} id="cadastroNascimento" type="date" max="9999-12-31"/>
-                {mensagemMenorDeIdade && <p className="absolute font-bold text-red-600 top-60 text-xs">Você precisa ter no mínimo 18 anos</p>}
+                {mensagemMenorDeIdade && <p id="mensagemMenorDeIdade" className="absolute top-60 font-bold text-red-600 text-xs">Você precisa ter no mínimo 18 anos</p>}
 
                 <LabelTelaDeCadastro nome="Contato (apenas números)" for="cadastroContato"/>
                 <InputTelaDeCadastro value={valorInputContato} onChange={formatacaoContato} maxLength="11" minLength="11" id="cadastroContato" placeholder="ex: 11999234567"/>
@@ -130,7 +130,7 @@ const TelaDeCadastro = ({ aoClicarNoX }) => {
                 <InputTelaDeCadastro value={valorInputUf} onChange={evento => setValorInputUf(evento.target.value.replace(/[^a-zA-ZÀ-ÿ ]/gu, ''))} maxLength="2" minLength="2" id="cadastroEstado"/>
                 
                 <button className="font-archivo border-2 mt-4 p-2 bg-color4 rounded" type="submit" id="btnRealizarCadastro">Realizar cadastro</button>
-                {mensagemFormularioEnviado && <p className="absolute font-bold font-archivo bottom-[40px] left-[150px] text-lg">Cadastro realizado com sucesso!</p>}
+                {mensagemFormularioEnviado && <p id="mensagemCadastroRealizado" className="absolute font-bold font-archivo bottom-[40px] left-[150px] text-lg">Cadastro realizado com sucesso!</p>}
                 </form>
             </div>
         </div>

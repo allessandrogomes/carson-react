@@ -104,6 +104,15 @@
     padding: 17px;
   }
 
+  #mensagemMenorDeIdade, #erroCep {
+    position: relative;
+    top: -10px;
+  }
+
+  #mensagemCadastroRealizado {
+    bottom: 25px
+  }
+
   #telaEsqueciMinhaSenha {
     width: 90%;
     z-index: 4;
