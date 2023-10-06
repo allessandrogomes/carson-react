@@ -49,7 +49,7 @@ const Cabecalho = ({ novoAnuncio, aoPesquisarVeiculo, listaDeSugestao, veiculoSu
     }
 
     return (
-        <header className="max-md:fixed max-md:z-[2] w-full bg-teal-400 h-28 flex justify-around items-center">
+        <header id="header" className="w-full bg-teal-400 h-28 flex justify-around items-center">
             <Logo />
             <MenuMobile 
                 aoClicarMenuMobile={menuMobileToggle}

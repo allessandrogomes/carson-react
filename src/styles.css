@@ -6,9 +6,18 @@
 
 /*Cabecalho */
 @media (max-width: 768px) {
+  #header {
+    z-index: 2;
+    position: fixed;
+  }
+
+  #mobileMenu {
+    display: block;
+  }
+
   .navList {
     position: absolute;
-    top: 14vh;
+    top: 100%;
     right: 0;
     width: 100vw;
     height: 92vh;
