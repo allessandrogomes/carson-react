@@ -10,6 +10,9 @@
 - [Índice](#índice)
 - [Descrição do Projeto](#o-que-é-carson)
 - [Funcionalidades do Projeto](#hammer-funcionalidades-do-projeto)
+- [Acesso ao Projeto](#file_folder-acesso-ao-projeto)
+- [Tecnologias utilizadas](#heavy_check_mark-tecnologias-utilizadas)
+- [Autor](#autor)
 
 # O que é CarsOn?
 CarsOn é um projeto web Front-End de compra e venda de veículos desenvolvido com o intuito de demonstrar na prática meus conhecimentos em React.js, TailwindCss, trabalhando com API, HTML, Css e JavaScript.
@@ -22,7 +25,7 @@ O site tem algumas funcionalidades que serão demonstradas nos próximos tópico
 - Validação e preenchimento automático de formulários
 - Filtragens múltiplas
 - Chat
-- Responsividade para Desktop, Tablets e Smartphones
+- Responsividade para Desktops, Tablets e Smartphones
 
 # :hammer: Funcionalidades do Projeto
 <h2>Anunciar um novo veículo</h2>
@@ -40,4 +43,56 @@ O site tem algumas funcionalidades que serão demonstradas nos próximos tópico
 
 ![validacao-formularios-gif-readme](https://github.com/allessandrogomes/carson-react/assets/112139213/e5777f7d-3080-4ceb-8bed-e8d28b6afa18)
 
-🚧 README em construção 🚧
+<h2>Filtragens múltiplas</h2>
+<p>Nessa funcionalidade, conseguimos realizar o comportamento de filtragem dos veículos, seja ele por Estado, Cor, Marca, Ano ou Preço. Os filtros também são múltiplos, ou seja, podemos utilizar mais de um filtro para realizar a requisição do veículo interessado. Os novos veículos anunciados também estão inclusos na filtragem. Em caso de não existir o veículo, será retornada uma mensagem informando.</p>
+
+![filtragem-gif-readme](https://github.com/allessandrogomes/carson-react/assets/112139213/8844d82a-6ae5-49f6-82ff-0e66c84f3ac5)
+
+<h2>Chat</h2>
+<p>Uma funcionalidade simples, mas que é muito encontrada em sites hoje em dia, o chat. Nele podemos digitar nossa mensagem para o devido atendimento.</p>
+
+![chat-gif-readme](https://github.com/allessandrogomes/carson-react/assets/112139213/7ff6dbd7-186c-4897-bf89-12e215639a96)
+
+<h2>Responsividade para Desktops, Tablets e Smartphones</h2>
+<p>O projeto CarsOn também foi desenvolvido pensando nos diversos tipos de telas. Diante disso, está implementada a responsivadade para Desktops, Tablets e Smartphones. Dessa forma conseguimos oferecer a melhor experiência para o usuário, independentemente do seu dispositivo.</p>
+
+![responsividade-gif-readme](https://github.com/allessandrogomes/carson-react/assets/112139213/70a35d85-a52b-4277-84e1-21de7da80833)
+
+# :file_folder: Acesso ao Projeto
+
+<h3>Faça a clonagem do Projeto</h3>
+
+```
+git clone https://github.com/allessandrogomes/carson-react.git
+```
+<h3>Instale as dependências</h3>
+
+```
+npm install
+```
+```
+npm install -D tailwindcss postcss autoprefixer
+```
+
+<h3>Rode o Projeto</h3>
+
+```
+npm start
+```
+
+<h3>Ou pode acessar também o link</h3>
+
+```
+https://carson-react.vercel.app
+```
+
+# :heavy_check_mark: Tecnologias utilizadas
+
+- ``React.js``
+- ``TailwindCSS``
+- ``PostCSS``
+
+# Autor
+
+| [<img loading="lazy" src="https://github.com/allessandrogomes.png" width=115><br><sub>Alessandro Gomes</sub>](https://github.com/allessandrogomes) |
+| :---: |
