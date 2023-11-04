@@ -70,9 +70,6 @@ git clone https://github.com/allessandrogomes/carson-react.git
 ```
 npm install
 ```
-```
-npm install -D tailwindcss postcss autoprefixer
-```
 
 <h3>Rode o Projeto</h3>
 
