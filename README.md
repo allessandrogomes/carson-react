@@ -85,7 +85,7 @@ https://carson-react.vercel.app
 
 # :heavy_check_mark: Tecnologias utilizadas
 
-- ``React.js``
+- ``React``
 - ``TailwindCSS``
 - ``PostCSS``
 
