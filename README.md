@@ -88,6 +88,7 @@ https://carson-react.vercel.app
 - ``React``
 - ``TailwindCSS``
 - ``PostCSS``
+- ``FetchAPI``
 
 # Autor
 
